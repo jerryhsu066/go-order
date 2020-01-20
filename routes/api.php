@@ -16,3 +16,12 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::group([
+    'prefix' => 'v1',
+], function () {
+    Route::resource('user', 'UserController')->only('index', 'show', 'store', 'update');
+    Route::resource('room', 'RoomController')->only('index', 'show', 'store', 'update');
+    Route::resource('team-buying', 'TeamBuyingController')->only('index', 'show', 'store', 'update');
+    Route::resource('menu', 'RestaurantController')->only('index', 'show', 'store', 'update');
+});
